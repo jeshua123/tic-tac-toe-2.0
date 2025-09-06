@@ -6,7 +6,7 @@
 }
 body {
   height: 100vh;
-  background: linear-gradient(135deg, #8052ec, #d161ff);
+  background: linear-gradient(135deg, #dad7df, #2d2c2d);
 }
 html {
   font-size: 16px;
@@ -23,6 +23,11 @@ html {
   display: flex;
   flex-wrap: wrap;
   gap: 2vmin;
+}
+.submenu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1vmin;
 }
 .button-option {
   background: #ffffff;
@@ -43,10 +48,10 @@ html {
   border: none;
   position: relative;
   margin: 1.5em auto 0 auto;
-  display: block;
+  display: inline-block;
 }
 .popup {
-  background: linear-gradient(135deg, #8052ec, #d161ff);
+  background: linear-gradient(135deg, #dad7df, #2d2c2d);
   height: 100%;
   width: 100%;
   position: absolute;
@@ -58,6 +63,7 @@ html {
   gap: 1em;
   font-size: 12vmin;
 }
+
 #juego_nuevo {
   font-size: 0.6em;
   padding: 0.5em 1em;
@@ -82,12 +88,39 @@ html {
   border-radius: 0.2em;
   border: none;
 }
-
+  
 #message {
   color: #ffffff;
   text-align: center;
   font-size: 1em;
 }
+
+
+.popup2 {
+  background: linear-gradient(135deg, #dad7df, #2d2c2d);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  z-index: 3;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1em;
+  font-size: 12vmin;
+}
+.inputJugador{
+  font-size: 0.6em;
+  padding: 0.5em 1em;
+  background-color: #0a0027;
+  color: #ffffff;
+  border-radius: 0.2em;
+  border: none;
+
+}
 .popup.hide {
-  display: ;
+  display: none;
+}
+.popup2.hide {
+  display: none;
 }
