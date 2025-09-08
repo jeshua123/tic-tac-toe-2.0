@@ -1,10 +1,26 @@
+import { useState } from "react";
+
 function App() {
-  console.log("hola")
+
+const [P1, setP1] = useState({})
+//const [P2, setP2] = useState({})
+//const [P3, setP3] = useState({})
+//const [P4, setP4] = useState({})
+//const [P5, setP5] = useState({})
+//const [P6, setP6] = useState({})
+//const [P7, setP7] = useState({})
+//const [P8, setP8] = useState({})
+//const [P9, setP9] = useState({})
+
+function Click_En_Posición(e) {
+  console.log(e)
+  
+}
   return (
     <div className="main">
    <div class="wrapper">
        <div class="container">
-           <button class="button-option"></button>
+           <button class="button-option" onClick={(e) => { Click_En_Posición(e)}}>X</button>
            <button class="button-option"></button>
            <button class="button-option"></button>
            <button class="button-option"></button>
@@ -17,7 +33,7 @@ function App() {
        <div className="submenu"> 
        <button id="restart">jugador 1</button>
        <button id="restart">jugador 2</button>
-       <button id="restart">inicio</button>
+       <button id="restart">Inicio</button>
        <button id="restart">Restart</button>
        </div>
    </div>
