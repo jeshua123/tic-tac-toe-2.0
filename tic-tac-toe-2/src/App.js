@@ -1,11 +1,13 @@
+
 import { useState } from "react";
 
 function App() {
 const [Turno, setTurno] = useState(true)
 const [Contador, setContador] = useState(0)
-const [Ganador, setGanador] = useState("")
-const [P1, setP1] = useState(
-  {
+const [jugador_1, setjugador_1] = useState({nombre:"",puntaje:0})
+const [jugador_2, setjugador_2] = useState({nombre:"",puntaje:0})
+
+const [P1, setP1] = useState({
 valor:"",
 display:"",
 disable:false}
@@ -39,77 +41,67 @@ valor:"",
 display:"",
 disable:false})
 const [P9, setP9] = useState(  {
-valor:null,
+valor:"",
 display:"",
 disable:false})
 function cambioTurno() {
   setTurno(!Turno)
 }
-function Click_En_Posición(e,setFun) {
+function Click_En_Posición(e,P,setFun) {
 
-setFun({display:Turno?"x":"o",disable:true,valor:Turno})
+setFun(() => { return {display:Turno?"x":"o",disable:true,valor:Turno} })
 cambioTurno()
 setContador(Contador+1)
 
 }
 
-if (Contador===5) {
-  switch (Ganador) {
-    //verticales
-  case (P1.valor)&&(P2.valor)&&(P3.valor):
-    setGanador("jugador 1 gana")
-    break;
-  case (P4.valor)&&(P5.valor)&&(P6.valor):
-   setGanador("jugador 1 gana")
-    break;
-      case (P7.valor)&&(P8.valor)&&(P9.valor):
-   setGanador("jugador 1 gana")
-    break;
-    //horizontales
-      case (P1.valor)&&(P4.valor)&&(P7.valor):
-   setGanador("jugador 1 gana")
-    break;
-      case (P2.valor)&&(P5.valor)&&(P8.valor):
-   setGanador("jugador 1 gana")
-    break;
-      case (P3.valor)&&(P6.valor)&&(P9.valor):
-   setGanador("jugador 1 gana")
-    break;
-    //diagonal
-         case (P3.valor)&&(P5.valor)&&(P9.valor):
-   setGanador("jugador 1 gana")
-    break;
-         case (P1.valor)&&(P5.valor)&&(P9.valor):
-   setGanador("jugador 1 gana")
-    break;
-         case (P3.valor)&&(P5.valor)&&(P7.valor):
-   setGanador("jugador 1 gana")
-    break;
-  default:
-    break;
+let posiciones =[
+  [P1.valor,P2.valor,P3.valor],
+  [P4.valor,P5.valor,P6.valor],
+  [P7.valor,P8.valor,P9.valor],
+  [P1.valor,P4.valor,P7.valor],
+  [P2.valor,P5.valor,P8.valor],
+  [P3.valor,P6.valor,P9.valor],
+  [P1.valor,P5.valor,P9.valor],
+  [P3.valor,P5.valor,P7.valor] ]
+
+  if (Contador>=5) {
+    revisa_Ganador()
+  }
+
+function revisa_Ganador() {
+  
+posiciones.forEach((iter)=>{
+ 
+if (iter[0] && iter[0] === iter[1] && iter[0] === iter[2]) {
+  setjugador_1((jugador_1) => { jugador_1.puntaje++ })
 }
+if ((iter[0]===false) && (iter[0]===false) ===( iter[1]===false) && (iter[0]===false) === (iter[2]===false)) {
+setjugador_2((jugador_2) => { jugador_2.puntaje++ })
+
 }
  
-
-
-
+})
+  
+}
+ 
   if (Contador===9) {
     alert("se acabo")
   }
-  console.log(Ganador)
+  console.log(Contador)
   return (
     <div className="main">
    <div className="wrapper">
        <div className="container">
-           <button className="button-option"disabled={P1.disable}  onClick={(e) => { Click_En_Posición(e,setP1)}}>{P1.display} </button>
-           <button className="button-option"disabled={P2.disable}  onClick={(e) => { Click_En_Posición(e,setP2)}}>{P2.display} </button>
-           <button className="button-option"disabled={P3.disable}  onClick={(e) => { Click_En_Posición(e,setP3)}}>{P3.display} </button>
-           <button className="button-option"disabled={P4.disable}  onClick={(e) => { Click_En_Posición(e,setP4)}}>{P4.display} </button>
-           <button className="button-option"disabled={P5.disable}  onClick={(e) => { Click_En_Posición(e,setP5)}}>{P5.display} </button>
-           <button className="button-option"disabled={P6.disable}  onClick={(e) => { Click_En_Posición(e,setP6)}}>{P6.display} </button>
-           <button className="button-option"disabled={P7.disable}  onClick={(e) => { Click_En_Posición(e,setP7)}}>{P7.display} </button>
-           <button className="button-option"disabled={P8.disable}  onClick={(e) => { Click_En_Posición(e,setP8)}}>{P8.display} </button>
-           <button className="button-option"disabled={P9.disable}  onClick={(e) => { Click_En_Posición(e,setP9)}}>{P9.display} </button>
+           <button className="button-option"disabled={P1.disable}  onClick={(e) => { Click_En_Posición(e,P1,setP1)}}>{P1.display} </button>
+           <button className="button-option"disabled={P2.disable}  onClick={(e) => { Click_En_Posición(e,P2, setP2)}}>{P2.display} </button>
+           <button className="button-option"disabled={P3.disable}  onClick={(e) => { Click_En_Posición(e,P3, setP3)}}>{P3.display} </button>
+           <button className="button-option"disabled={P4.disable}  onClick={(e) => { Click_En_Posición(e,P4, setP4)}}>{P4.display} </button>
+           <button className="button-option"disabled={P5.disable}  onClick={(e) => { Click_En_Posición(e,P5, setP5)}}>{P5.display} </button>
+           <button className="button-option"disabled={P6.disable}  onClick={(e) => { Click_En_Posición(e,P6, setP6)}}>{P6.display} </button>
+           <button className="button-option"disabled={P7.disable}  onClick={(e) => { Click_En_Posición(e,P7, setP7)}}>{P7.display} </button>
+           <button className="button-option"disabled={P8.disable}  onClick={(e) => { Click_En_Posición(e,P8, setP8)}}>{P8.display} </button>
+           <button className="button-option"disabled={P9.disable}  onClick={(e) => { Click_En_Posición(e,P9, setP9)}}>{P9.display} </button>
 
        </div>
        <div className="submenu"> 
