@@ -1,11 +1,20 @@
 
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 function App() {
 const [Turno, setTurno] = useState(true)
+
 const [Contador, setContador] = useState(0)
-const [jugador_1, setjugador_1] = useState({nombre:"",puntaje:0})
-const [jugador_2, setjugador_2] = useState({nombre:"",puntaje:0})
+
+const [jugador_1, setjugador_1] = useState("jesus")
+
+const [score1, setscore1] = useState(0)
+
+const [jugador_2, setjugador_2] = useState("pepe")
+
+const [score2, setscore2] = useState(0)
+
+
 
 const [P1, setP1] = useState({
 valor:"",
@@ -44,18 +53,20 @@ const [P9, setP9] = useState(  {
 valor:"",
 display:"",
 disable:false})
+
 function cambioTurno() {
   setTurno(!Turno)
 }
-function Click_En_Posición(e,P,setFun) {
 
-setFun(() => { return {display:Turno?"x":"o",disable:true,valor:Turno} })
+function Click_En_Posición(e,P,setFun) {
+setFun(() => { return {display:Turno?"x":"o",disable:true,valor:Turno?"x":"o"} })
 cambioTurno()
 setContador(Contador+1)
-
 }
 
-let posiciones =[
+function revisa_Ganador() {
+  
+  let posiciones =[
   [P1.valor,P2.valor,P3.valor],
   [P4.valor,P5.valor,P6.valor],
   [P7.valor,P8.valor,P9.valor],
@@ -65,30 +76,35 @@ let posiciones =[
   [P1.valor,P5.valor,P9.valor],
   [P3.valor,P5.valor,P7.valor] ]
 
-  if (Contador>=5) {
-    revisa_Ganador()
-  }
 
-function revisa_Ganador() {
-  
-posiciones.forEach((iter)=>{
- 
-if (iter[0] && iter[0] === iter[1] && iter[0] === iter[2]) {
-  setjugador_1((jugador_1) => { jugador_1.puntaje++ })
-}
-if ((iter[0]===false) && (iter[0]===false) ===( iter[1]===false) && (iter[0]===false) === (iter[2]===false)) {
-setjugador_2((jugador_2) => { jugador_2.puntaje++ })
+  posiciones.forEach((iter) => {
+    if (iter[0] && iter[0] === iter[1] && iter[0] === iter[2]) {
+      console.log("Ganador encontrado:", iter[0]);
 
-}
+      if (iter[0] === "x") {
+        setscore1((prev) => prev + 1);
+      } else if (iter[0] === "o") {
+        setscore2((prev) => prev + 1);
+      }
+    }
+
+
+return
+} ) }
  
-})
+
+useEffect(() => {
   
-}
+    revisa_Ganador();
+  
+// eslint-disable-next-line react-hooks/exhaustive-deps
+}, [P1.valor, P2.valor, P3.valor, P4.valor, P5.valor, P6.valor, P7.valor, P8.valor, P9.valor,]);
+
+  
  
-  if (Contador===9) {
-    alert("se acabo")
-  }
   console.log(Contador)
+  console.log(score1,score2)
+
   return (
     <div className="main">
    <div className="wrapper">
@@ -105,8 +121,8 @@ setjugador_2((jugador_2) => { jugador_2.puntaje++ })
 
        </div>
        <div className="submenu"> 
-       <button id="restart">jugador 1</button>
-       <button id="restart">jugador 2</button>
+       <button id="restart"> {jugador_1+" ="+score1} </button>
+       <button id="restart">{jugador_2+" = "+score2}</button>
        <button id="restart">Inicio</button>
        <button id="restart">Restart</button>
        </div>
@@ -128,5 +144,6 @@ setjugador_2((jugador_2) => { jugador_2.puntaje++ })
 
   );
 }
+
 
 export default App;
