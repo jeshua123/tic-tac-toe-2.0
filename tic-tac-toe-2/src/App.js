@@ -6,78 +6,54 @@ const [Turno, setTurno] = useState(true)
 
 const [Contador, setContador] = useState(0)
 
-const [jugador_1, setjugador_1] = useState("jesus")
+const [jugador_1, setjugador_1] = useState("")
 
 const [score1, setscore1] = useState(0)
 
-const [jugador_2, setjugador_2] = useState("pepe")
+const [jugador_2, setjugador_2] = useState("")
 
 const [score2, setscore2] = useState(0)
 
+const [posiciones, setposiciones] = useState(
+  Array(9).fill(0).map(() => ({
+    valor: "",
+    display: "",
+    disable: false
+  }))
+);
 
-
-const [P1, setP1] = useState({
-valor:"",
-display:"",
-disable:false}
-)
-const [P2, setP2] = useState(  {
-valor:"",
-display:"",
-disable:false})
-const [P3, setP3] = useState(  {
-valor:"",
-display:"",
-disable:false})
-const [P4, setP4] = useState(  {
-valor:"",
-display:"",
-disable:false})
-const [P5, setP5] = useState(  {
-valor:"",
-display:"",
-disable:false})
-const [P6, setP6] = useState(  {
-valor:"",
-display:"",
-disable:false})
-const [P7, setP7] = useState(  {
-valor:"",
-display:"",
-disable:false})
-const [P8, setP8] = useState(  {
-valor:"",
-display:"",
-disable:false})
-const [P9, setP9] = useState(  {
-valor:"",
-display:"",
-disable:false})
+const [mostrarPopup, setmostrarPopup] = useState(false)
 
 function cambioTurno() {
   setTurno(!Turno)
 }
 
-function Click_En_Posición(e,P,setFun) {
-setFun(() => { return {display:Turno?"x":"o",disable:true,valor:Turno?"x":"o"} })
+function Click_En_Posición(index) {
+  const nuevasposiciones=[...posiciones]
+
+nuevasposiciones[index]={...nuevasposiciones[index],display:Turno?"x":"o",disable:true,valor:Turno?"x":"o"}
+
+setposiciones(nuevasposiciones)
+
 cambioTurno()
+
 setContador(Contador+1)
 }
 
 function revisa_Ganador() {
-  
-  let posiciones =[
-  [P1.valor,P2.valor,P3.valor],
-  [P4.valor,P5.valor,P6.valor],
-  [P7.valor,P8.valor,P9.valor],
-  [P1.valor,P4.valor,P7.valor],
-  [P2.valor,P5.valor,P8.valor],
-  [P3.valor,P6.valor,P9.valor],
-  [P1.valor,P5.valor,P9.valor],
-  [P3.valor,P5.valor,P7.valor] ]
+
+  let combinaciones =[
+  [posiciones[0].valor,posiciones[1].valor,posiciones[2].valor],
+  [posiciones[3].valor,posiciones[4].valor,posiciones[5].valor],
+  [posiciones[6].valor,posiciones[7].valor,posiciones[8].valor],
+  [posiciones[0].valor,posiciones[4].valor,posiciones[6].valor],
+  [posiciones[1].valor,posiciones[4].valor,posiciones[7].valor],
+  [posiciones[2].valor,posiciones[5].valor,posiciones[8].valor],
+  [posiciones[0].valor,posiciones[4].valor,posiciones[8].valor],
+  [posiciones[2].valor,posiciones[4].valor,posiciones[6].valor] ]
 
 
-  posiciones.forEach((iter) => {
+  combinaciones.forEach((iter) => {
     if (iter[0] && iter[0] === iter[1] && iter[0] === iter[2]) {
       console.log("Ganador encontrado:", iter[0]);
 
@@ -92,42 +68,56 @@ function revisa_Ganador() {
 return
 } ) }
  
+function restar() {
+  setposiciones(Array(9).fill(0).map(() => ({
+    valor: "",
+    display: "",
+    disable: false
+  })));
+  setTurno(true);
+  setContador(0);
+}
+
+function reinicioOnClick() {
+  restar()
+  setjugador_1("")
+  setjugador_2("")
+  setmostrarPopup(!mostrarPopup)
+
+}
 
 useEffect(() => {
-  
     revisa_Ganador();
-  
 // eslint-disable-next-line react-hooks/exhaustive-deps
-}, [P1.valor, P2.valor, P3.valor, P4.valor, P5.valor, P6.valor, P7.valor, P8.valor, P9.valor,]);
+}, [posiciones]);
 
-  
- 
-  console.log(Contador)
-  console.log(score1,score2)
 
+console.log(mostrarPopup)
   return (
     <div className="main">
    <div className="wrapper">
        <div className="container">
-           <button className="button-option"disabled={P1.disable}  onClick={(e) => { Click_En_Posición(e,P1,setP1)}}>{P1.display} </button>
-           <button className="button-option"disabled={P2.disable}  onClick={(e) => { Click_En_Posición(e,P2, setP2)}}>{P2.display} </button>
-           <button className="button-option"disabled={P3.disable}  onClick={(e) => { Click_En_Posición(e,P3, setP3)}}>{P3.display} </button>
-           <button className="button-option"disabled={P4.disable}  onClick={(e) => { Click_En_Posición(e,P4, setP4)}}>{P4.display} </button>
-           <button className="button-option"disabled={P5.disable}  onClick={(e) => { Click_En_Posición(e,P5, setP5)}}>{P5.display} </button>
-           <button className="button-option"disabled={P6.disable}  onClick={(e) => { Click_En_Posición(e,P6, setP6)}}>{P6.display} </button>
-           <button className="button-option"disabled={P7.disable}  onClick={(e) => { Click_En_Posición(e,P7, setP7)}}>{P7.display} </button>
-           <button className="button-option"disabled={P8.disable}  onClick={(e) => { Click_En_Posición(e,P8, setP8)}}>{P8.display} </button>
-           <button className="button-option"disabled={P9.disable}  onClick={(e) => { Click_En_Posición(e,P9, setP9)}}>{P9.display} </button>
+           <button className="button-option"disabled={posiciones[0].disable}  onClick={(e) => { Click_En_Posición(0)}}>{posiciones[0].display} </button>
+           <button className="button-option"disabled={posiciones[1].disable}  onClick={(e) => { Click_En_Posición(1)}}>{posiciones[1].display} </button>
+           <button className="button-option"disabled={posiciones[2].disable}  onClick={(e) => { Click_En_Posición(2)}}>{posiciones[2].display} </button>
+           <button className="button-option"disabled={posiciones[3].disable}  onClick={(e) => { Click_En_Posición(3)}}>{posiciones[3].display} </button>
+           <button className="button-option"disabled={posiciones[4].disable}  onClick={(e) => { Click_En_Posición(4)}}>{posiciones[4].display} </button>
+           <button className="button-option"disabled={posiciones[5].disable}  onClick={(e) => { Click_En_Posición(5)}}>{posiciones[5].display} </button>
+           <button className="button-option"disabled={posiciones[6].disable}  onClick={(e) => { Click_En_Posición(6)}}>{posiciones[6].display} </button>
+           <button className="button-option"disabled={posiciones[7].disable}  onClick={(e) => { Click_En_Posición(7)}}>{posiciones[7].display} </button>
+           <button className="button-option"disabled={posiciones[8 ].disable}  onClick={(e) => { Click_En_Posición(8 )}}>{posiciones[8 ].display} </button>
 
        </div>
        <div className="submenu"> 
        <button id="restart"> {jugador_1+" ="+score1} </button>
        <button id="restart">{jugador_2+" = "+score2}</button>
-       <button id="restart">Inicio</button>
-       <button id="restart">Restart</button>
+
+       <button id="restart" onClick={(e) => { reinicioOnClick() }}>Inicio</button>
+
+       <button id="restart" onClick={(e) => { restar() }}  >Restart</button>
        </div>
    </div>
-   <div className="popup hide">
+   <div className={`popup ${mostrarPopup ? "show" : "hide"}`}>
        <p id="message">TICK TACK TOE</p>
        <button id="juego_nuevo">Jugador VS jugador </button>
        <button id="dos_jugadores">Jugador vs Computador</button>
