@@ -121,6 +121,10 @@ html {
 .popup.hide {
   display: none;
 }
+.popup.show {
+  display: ;
+}
+
 .popup2.hide {
   display: none;
 }
