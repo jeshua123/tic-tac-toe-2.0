@@ -24,6 +24,8 @@ const [posiciones, setposiciones] = useState(
 
 const [mostrarPopup, setmostrarPopup] = useState(false)
 
+const [ganadorEncontrado, setganadorEncontrado] = useState(false)
+
 function cambioTurno() {
   setTurno(!Turno)
 }
@@ -55,16 +57,13 @@ function revisa_Ganador() {
 
   combinaciones.forEach((iter) => {
     if (iter[0] && iter[0] === iter[1] && iter[0] === iter[2]) {
-      console.log("Ganador encontrado:", iter[0]);
-
+      alert("parar")
       if (iter[0] === "x") {
         setscore1((prev) => prev + 1);
       } else if (iter[0] === "o") {
         setscore2((prev) => prev + 1);
       }
     }
-
-
 return
 } ) }
  
@@ -86,10 +85,19 @@ function reinicioOnClick() {
 
 }
 
+function deshabilitar_Casillas() {
+    let nuevasposiciones=[...posiciones]
+  nuevasposiciones.forEach(iter =>  iter.disable=true)
+  setposiciones(nuevasposiciones)
+}
 useEffect(() => {
     revisa_Ganador();
 // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [posiciones]);
+
+
+    deshabilitar_Casillas();
+// eslint-disable-next-line react-hooks/exhaustive-deps
 
 
 console.log(mostrarPopup)
