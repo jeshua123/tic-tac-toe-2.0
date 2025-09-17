@@ -1,10 +1,14 @@
 {
     "cSpell.words": [
+        "hayganador",
         "nuevasposiciones",
         "puntaje",
+        "sethayganador",
         "setjugador",
         "setmostrar",
+        "setmostrarmenu",
         "setposiciones",
-        "setscore"
+        "setscore",
+        "vacias"
     ]
 }

@@ -21,10 +21,24 @@ const [posiciones, setposiciones] = useState(
     disable: false
   }))
 );
+const [mostrarmenu, setmostrarmenu] = useState(true)
+const [mostrarmenu2, setmostrarmenu2] = useState(false)
 
-const [mostrarPopup, setmostrarPopup] = useState(false)
+const [hayganador, sethayganador] = useState(false)
+const [contraJugador, setcontraJugador] = useState(false)
+const [contraPc, setcontraPc] = useState(false)
 
-const [ganadorEncontrado, setganadorEncontrado] = useState(false)
+
+function click_Contra_jugador() {
+   setcontraJugador(true)
+  
+  }
+function click_Contra_Pc() {
+   setcontraPc(true)
+  
+  }
+ 
+
 
 function cambioTurno() {
   setTurno(!Turno)
@@ -40,67 +54,71 @@ setposiciones(nuevasposiciones)
 cambioTurno()
 
 setContador(Contador+1)
+
+
 }
 
 function revisa_Ganador() {
 
+ if ( hayganador) return;
   let combinaciones =[
   [posiciones[0].valor,posiciones[1].valor,posiciones[2].valor],
   [posiciones[3].valor,posiciones[4].valor,posiciones[5].valor],
   [posiciones[6].valor,posiciones[7].valor,posiciones[8].valor],
-  [posiciones[0].valor,posiciones[4].valor,posiciones[6].valor],
+
+  [posiciones[0].valor,posiciones[3].valor,posiciones[6].valor],
   [posiciones[1].valor,posiciones[4].valor,posiciones[7].valor],
   [posiciones[2].valor,posiciones[5].valor,posiciones[8].valor],
+  
   [posiciones[0].valor,posiciones[4].valor,posiciones[8].valor],
   [posiciones[2].valor,posiciones[4].valor,posiciones[6].valor] ]
 
 
   combinaciones.forEach((iter) => {
     if (iter[0] && iter[0] === iter[1] && iter[0] === iter[2]) {
-      alert("parar")
       if (iter[0] === "x") {
         setscore1((prev) => prev + 1);
       } else if (iter[0] === "o") {
         setscore2((prev) => prev + 1);
       }
+     sethayganador(true)
+     deshabilitar_Casillas()
     }
 return
 } ) }
  
 function restar() {
-  setposiciones(Array(9).fill(0).map(() => ({
+  const posiciones_vacias = posiciones.map(() => ({
     valor: "",
     display: "",
-    disable: false
-  })));
+    disable: false,
+  }));
+
+  setposiciones(posiciones_vacias);
   setTurno(true);
   setContador(0);
+  sethayganador(false);
 }
 
 function reinicioOnClick() {
   restar()
   setjugador_1("")
+  setscore1(0)
   setjugador_2("")
-  setmostrarPopup(!mostrarPopup)
+  setscore2(0)
+  setmostrarmenu(!mostrarmenu)
 
 }
 
 function deshabilitar_Casillas() {
-    let nuevasposiciones=[...posiciones]
-  nuevasposiciones.forEach(iter =>  iter.disable=true)
-  setposiciones(nuevasposiciones)
+  const nuevasposiciones = posiciones.map(pos => ({ ...pos, disable: true }));
+  setposiciones(nuevasposiciones);
 }
 useEffect(() => {
     revisa_Ganador();
 // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [posiciones]);
 
-
-    deshabilitar_Casillas();
-// eslint-disable-next-line react-hooks/exhaustive-deps
-
-
-console.log(mostrarPopup)
   return (
     <div className="main">
    <div className="wrapper">
@@ -125,17 +143,17 @@ console.log(mostrarPopup)
        <button id="restart" onClick={(e) => { restar() }}  >Restart</button>
        </div>
    </div>
-   <div className={`popup ${mostrarPopup ? "show" : "hide"}`}>
+   <div className={`menu_principal ${mostrarmenu ? "show" : "hide"}`}>
        <p id="message">TICK TACK TOE</p>
-       <button id="juego_nuevo">Jugador VS jugador </button>
-       <button id="dos_jugadores">Jugador vs Computador</button>
-       <button id="vs_computadora">Empezar</button>
+       <button id="juego_nuevo" onClick={() => {click_Contra_jugador()}}>Jugador VS jugador </button>
+       <button id="dos_jugadores" onClick={() => {click_Contra_Pc()}}>Jugador vs Computador</button>
+       <button id="vs_computadora"onClick={() => {setmostrarmenu(false);setmostrarmenu2(true)}}>Empezar</button>
    </div>
           
-   <div className="popup2 hide">
+   <div className={`menu2 ${mostrarmenu2 ? "show" : "hide"}`}>
        <input className="inputJugador" placeholder="Jugador 1"/>       
        <input className="inputJugador" placeholder="Jugador 2"/>       
-       <button id="vs_computadora">Empezar</button>
+       <button id="vs_computadora"onClick={() => {setmostrarmenu(false);setmostrarmenu2(false)}}>Empezar</button>
    </div>
           
     </div>
