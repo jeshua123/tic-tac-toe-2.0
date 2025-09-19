@@ -28,10 +28,11 @@ const [hayganador, sethayganador] = useState(false)
 const [contraJugador, setcontraJugador] = useState(false)
 const [contraPc, setcontraPc] = useState(false)
 
+const [estaDeshabilitado, setestaDesabilitado] = useState(true);
 
 function click_Contra_jugador() {
    setcontraJugador(true)
-  
+  setestaDesabilitado(false)
   }
 function click_Contra_Pc() {
    setcontraPc(true)
@@ -61,6 +62,7 @@ setContador(Contador+1)
 function revisa_Ganador() {
 
  if ( hayganador) return;
+ 
   let combinaciones =[
   [posiciones[0].valor,posiciones[1].valor,posiciones[2].valor],
   [posiciones[3].valor,posiciones[4].valor,posiciones[5].valor],
@@ -109,6 +111,10 @@ function reinicioOnClick() {
   setmostrarmenu(!mostrarmenu)
 
 }
+function recibirNombre(e,setState) {
+  let nombreJugador=e.target.value
+  setState(nombreJugador)
+}
 
 function deshabilitar_Casillas() {
   const nuevasposiciones = posiciones.map(pos => ({ ...pos, disable: true }));
@@ -119,21 +125,24 @@ useEffect(() => {
 // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [posiciones]);
 
+console.log(jugador_1)
+console.log(jugador_2)
   return (
     <div className="main">
    <div className="wrapper">
-       <div className="container">
-           <button className="button-option"disabled={posiciones[0].disable}  onClick={(e) => { Click_En_Posición(0)}}>{posiciones[0].display} </button>
-           <button className="button-option"disabled={posiciones[1].disable}  onClick={(e) => { Click_En_Posición(1)}}>{posiciones[1].display} </button>
-           <button className="button-option"disabled={posiciones[2].disable}  onClick={(e) => { Click_En_Posición(2)}}>{posiciones[2].display} </button>
-           <button className="button-option"disabled={posiciones[3].disable}  onClick={(e) => { Click_En_Posición(3)}}>{posiciones[3].display} </button>
-           <button className="button-option"disabled={posiciones[4].disable}  onClick={(e) => { Click_En_Posición(4)}}>{posiciones[4].display} </button>
-           <button className="button-option"disabled={posiciones[5].disable}  onClick={(e) => { Click_En_Posición(5)}}>{posiciones[5].display} </button>
-           <button className="button-option"disabled={posiciones[6].disable}  onClick={(e) => { Click_En_Posición(6)}}>{posiciones[6].display} </button>
-           <button className="button-option"disabled={posiciones[7].disable}  onClick={(e) => { Click_En_Posición(7)}}>{posiciones[7].display} </button>
-           <button className="button-option"disabled={posiciones[8 ].disable}  onClick={(e) => { Click_En_Posición(8 )}}>{posiciones[8 ].display} </button>
+<div className="container">
+  {posiciones.map((pos, index) => (
+    <button
+      key={index}
+      className="button-option"
+      disabled={pos.disable}
+      onClick={() => Click_En_Posición(index)}
+    >
+      {pos.display}
+    </button>
+  ))}
+</div>
 
-       </div>
        <div className="submenu"> 
        <button id="restart"> {jugador_1+" ="+score1} </button>
        <button id="restart">{jugador_2+" = "+score2}</button>
@@ -147,12 +156,12 @@ useEffect(() => {
        <p id="message">TICK TACK TOE</p>
        <button id="juego_nuevo" onClick={() => {click_Contra_jugador()}}>Jugador VS jugador </button>
        <button id="dos_jugadores" onClick={() => {click_Contra_Pc()}}>Jugador vs Computador</button>
-       <button id="vs_computadora"onClick={() => {setmostrarmenu(false);setmostrarmenu2(true)}}>Empezar</button>
+       <button id="vs_computadora"disabled={isDisabled} onClick={() => {setmostrarmenu(false);setmostrarmenu2(true)}}>Empezar</button>
    </div>
           
    <div className={`menu2 ${mostrarmenu2 ? "show" : "hide"}`}>
-       <input className="inputJugador" placeholder="Jugador 1"/>       
-       <input className="inputJugador" placeholder="Jugador 2"/>       
+       <input className="inputJugador" placeholder="Jugador 1" value={jugador_1} onChange={(e) => {recibirNombre(e,setjugador_1)}}/>       
+       <input className="inputJugador" placeholder="Jugador 2" value={jugador_2}onChange={(e) => {recibirNombre(e,setjugador_2)}}/>       
        <button id="vs_computadora"onClick={() => {setmostrarmenu(false);setmostrarmenu2(false)}}>Empezar</button>
    </div>
           
