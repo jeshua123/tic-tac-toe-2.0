@@ -128,3 +128,6 @@ html {
 .menu2.hide {
   display: none;
 }
+.displayhide{
+  display:none
+}

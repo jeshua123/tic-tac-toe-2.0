@@ -29,18 +29,10 @@ const [contraJugador, setcontraJugador] = useState(false)
 const [contraPc, setcontraPc] = useState(false)
 
 const [estaDeshabilitado, setestaDesabilitado] = useState(true);
+const [estaDeshabilitado2, setestaDesabilitado2] = useState(true);
 
-function click_Contra_jugador() {
-   setcontraJugador(true)
-  setestaDesabilitado(false)
-  }
-function click_Contra_Pc() {
-   setcontraPc(true)
-  
-  }
+
  
-
-
 function cambioTurno() {
   setTurno(!Turno)
 }
@@ -109,6 +101,9 @@ function reinicioOnClick() {
   setjugador_2("")
   setscore2(0)
   setmostrarmenu(!mostrarmenu)
+  setestaDesabilitado(true)
+  setestaDesabilitado2(true)
+  setcontraPc(false)
 
 }
 function recibirNombre(e,setState) {
@@ -120,10 +115,26 @@ function deshabilitar_Casillas() {
   const nuevasposiciones = posiciones.map(pos => ({ ...pos, disable: true }));
   setposiciones(nuevasposiciones);
 }
+
+
+function click_Contra_jugador() {
+   setcontraJugador(true)
+  setestaDesabilitado(false)
+  }
+function click_Contra_Pc() {
+   setcontraPc(true)
+  setestaDesabilitado(false)
+  }
 useEffect(() => {
     revisa_Ganador();
 // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [posiciones]);
+useEffect(() => {
+    if ((jugador_1&&jugador_2)||(jugador_1&&contraPc)) {
+      setestaDesabilitado2(false)
+    }
+// eslint-disable-next-line react-hooks/exhaustive-deps
+}, [jugador_1,jugador_2]);
 
 console.log(jugador_1)
 console.log(jugador_2)
@@ -145,7 +156,7 @@ console.log(jugador_2)
 
        <div className="submenu"> 
        <button id="restart"> {jugador_1+" ="+score1} </button>
-       <button id="restart">{jugador_2+" = "+score2}</button>
+       <button id="restart">{`${jugador_2?jugador_2:"PC"}`+" = "+score2}</button>
 
        <button id="restart" onClick={(e) => { reinicioOnClick() }}>Inicio</button>
 
@@ -156,13 +167,13 @@ console.log(jugador_2)
        <p id="message">TICK TACK TOE</p>
        <button id="juego_nuevo" onClick={() => {click_Contra_jugador()}}>Jugador VS jugador </button>
        <button id="dos_jugadores" onClick={() => {click_Contra_Pc()}}>Jugador vs Computador</button>
-       <button id="vs_computadora"disabled={isDisabled} onClick={() => {setmostrarmenu(false);setmostrarmenu2(true)}}>Empezar</button>
+       <button id="vs_computadora"disabled={estaDeshabilitado} onClick={() => {setmostrarmenu(false);setmostrarmenu2(true)}}>Empezar</button>
    </div>
           
    <div className={`menu2 ${mostrarmenu2 ? "show" : "hide"}`}>
        <input className="inputJugador" placeholder="Jugador 1" value={jugador_1} onChange={(e) => {recibirNombre(e,setjugador_1)}}/>       
-       <input className="inputJugador" placeholder="Jugador 2" value={jugador_2}onChange={(e) => {recibirNombre(e,setjugador_2)}}/>       
-       <button id="vs_computadora"onClick={() => {setmostrarmenu(false);setmostrarmenu2(false)}}>Empezar</button>
+       <input className= {`inputJugador ${contraPc ? "displayhide" :"" }`} placeholder="Jugador 2" value={jugador_2}onChange={(e) => {recibirNombre(e,setjugador_2)}}/>       
+       <button id="vs_computadora" disabled={estaDeshabilitado2} onClick={() => {setmostrarmenu(false);setmostrarmenu2(false)}}>Empezar</button>
    </div>
           
     </div>
