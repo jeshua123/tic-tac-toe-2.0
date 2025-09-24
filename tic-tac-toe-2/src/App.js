@@ -21,6 +21,8 @@ const [posiciones, setposiciones] = useState(
     disable: false
   }))
 );
+
+
 const [mostrarmenu, setmostrarmenu] = useState(true)
 const [mostrarmenu2, setmostrarmenu2] = useState(false)
 
@@ -66,7 +68,6 @@ function revisa_Ganador() {
   
   [posiciones[0].valor,posiciones[4].valor,posiciones[8].valor],
   [posiciones[2].valor,posiciones[4].valor,posiciones[6].valor] ]
-
 
   combinaciones.forEach((iter) => {
     if (iter[0] && iter[0] === iter[1] && iter[0] === iter[2]) {
