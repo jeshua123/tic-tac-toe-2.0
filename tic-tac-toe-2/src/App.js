@@ -23,7 +23,8 @@ function App() {
     setWinningCells([]);
   };
 
- 
+
+ //reset 
   const resetGame = () => {
     setJugador1("");
     setJugador2("");
