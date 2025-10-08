@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./App.css"; 
+import Main from './pages/Main';
 
 function App() {
   const [step, setStep] = useState("menu")
@@ -104,14 +105,9 @@ function App() {
 
 
   return (
-    <div className="main">
-      {step==="menu" && (
-        <div className="menu">
-          <h1>TIC TAC TOE</h1>
-          <button onClick={()=>{setMode("jugador"); setStep("nombres");}}>Jugador vs Jugador</button>
-          <button onClick={()=>{setMode("pc"); setStep("nombres");}}>Jugador vs PC</button>
-        </div>
-      )}
+    <>
+    <Main setMode={setMode} setStep={setStep} />
+
 
       {step==="nombres" && (
         <div className="menu">
@@ -146,7 +142,7 @@ function App() {
           </div>
         </div>
       )}
-    </div>
+    </>
     
   );
 }
