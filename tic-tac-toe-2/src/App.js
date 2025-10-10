@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import "./App.css"; 
 import Main from './pages/Main';
 
+
+
 function App() {
   const [step, setStep] = useState("menu")
   const [mode, setMode] = useState("")
