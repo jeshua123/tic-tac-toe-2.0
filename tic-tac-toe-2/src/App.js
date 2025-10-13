@@ -116,9 +116,6 @@ function App() {
 
 <Menu/>
 <Juego/>
-
-
-     
     </>
     
   );
