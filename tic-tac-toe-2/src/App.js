@@ -1,14 +1,9 @@
 import { useState, useEffect } from "react";
-import "./App.css"; 
-import Main from './pages/Main';
-import Menu from './pages/Menu';
-import Juego from './pages/Juego';
-
-
+import "./App.css"; // Asegúrate de usar el CSS que te daré más abajo
 
 function App() {
-  const [step, setStep] = useState("menu")
-  const [mode, setMode] = useState("")
+  const [step, setStep] = useState("menu"); // menu | nombres | juego
+  const [mode, setMode] = useState(""); // jugador | pc
 
   const [jugador1, setJugador1] = useState("");
   const [jugador2, setJugador2] = useState("");
@@ -20,7 +15,7 @@ function App() {
   const [winner, setWinner] = useState(null);
   const [winningCells, setWinningCells] = useState([]);
 
-  
+  // Reiniciar tablero
   const resetBoard = () => {
     setBoard(Array(9).fill(""));
     setTurn("X");
@@ -28,8 +23,7 @@ function App() {
     setWinningCells([]);
   };
 
-
- //reset 
+  // Reiniciar todo
   const resetGame = () => {
     setJugador1("");
     setJugador2("");
@@ -43,7 +37,7 @@ function App() {
     setStep("menu");
   };
 
- 
+  // Manejo de jugada
   const handleClick = (index) => {
     if (board[index] !== "" || winner) return;
     const newBoard = [...board];
@@ -52,7 +46,7 @@ function App() {
     setTurn(turn === "X" ? "O" : "X");
   };
 
-  
+  // IA media
   const pcMove = () => {
     const newBoard = [...board];
     const winIndex = findBestMove(newBoard, "O");
@@ -79,7 +73,7 @@ function App() {
     return -1;
   };
 
-
+  // Revisa ganador
   useEffect(()=>{
     const combos = [
       [0,1,2],[3,4,5],[6,7,8],
@@ -100,6 +94,7 @@ function App() {
     }
   },[board]);
 
+  // PC move
   useEffect(()=>{
     if(mode==="pc" && turn==="O" && !winner){
       const timer = setTimeout(()=>pcMove(),600);
@@ -107,17 +102,49 @@ function App() {
     }
   },[turn,mode,winner]);
 
-
+  // ---- RENDER ----
   return (
-    <>
-    <Main setMode={setMode} setStep={setStep} />
+    <div className="main">
+      {step==="menu" && (
+        <div className="menu">
+          <h1>TIC TAC TOE</h1>
+          <button onClick={()=>{setMode("jugador"); setStep("nombres");}}>Jugador vs Jugador</button>
+          <button onClick={()=>{setMode("pc"); setStep("nombres");}}>Jugador vs PC</button>
+        </div>
+      )}
 
+      {step==="nombres" && (
+        <div className="menu">
+          <h2>Ingresa los nombres</h2>
+          <input placeholder="Jugador 1" value={jugador1} onChange={e=>setJugador1(e.target.value)}/>
+          {mode==="jugador" && <input placeholder="Jugador 2" value={jugador2} onChange={e=>setJugador2(e.target.value)}/>}
+          <button disabled={!jugador1 || (mode==="jugador" && !jugador2)} onClick={()=>setStep("juego")}>Empezar</button>
+        </div>
+      )}
 
+      {step==="juego" && (
+        <div className="game">
+          <div className="scoreboard">
+            <span>{jugador1 || "Jugador 1"} (X): {score1}</span>
+            <span>{mode==="pc"?"PC":(jugador2||"Jugador 2")} (O): {score2}</span>
+          </div>
 
-<Menu/>
-<Juego/>
-    </>
-    
+          <div className="board">
+            {board.map((cell,i)=>(
+              <button key={i} className={`cell ${winningCells.includes(i)?"winner":""}`} onClick={()=>handleClick(i)} disabled={cell!==""||winner}>
+                {cell}
+              </button>
+            ))}
+          </div>
+
+          <div className="controls">
+            {winner && <h3>{winner==="Empate"?"¡Empate!":`${winner} ganó!`}</h3>}
+            <button onClick={resetBoard}>Reiniciar ronda</button>
+            <button onClick={resetGame}>Volver al inicio</button>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
 
