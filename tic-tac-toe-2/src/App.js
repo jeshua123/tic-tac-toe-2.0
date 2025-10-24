@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
+import { Routes,Route,Link } from "react-router-dom";
 import "./App.css"; // Asegúrate de usar el CSS que te daré más abajo
+
 
 function App() {
   const [step, setStep] = useState("menu"); // menu | nombres | juego
