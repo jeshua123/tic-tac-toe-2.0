@@ -8,14 +8,15 @@ function Juego() {
         jugador1, jugador2,
         score1, score2,
         board, winner, winningCells,
-        handleClick, resetBoard, resetGame
+        handleClick, resetBoard, resetGame,
+        habilitarVolver
     } = useContext(GameContext);
     return (
         <div className="game">
-            <div className="scoreboard">
-                <span>{jugador1 || "Jugador 1"} (X): {score1}</span>
-                <span>{mode === "pc" ? "PC" : (jugador2 || "Jugador 2")} (O): {score2}</span>
-            </div>
+<div className="scoreboard">
+  <span className="p1">{jugador1 || "Jugador 1"} (X): {score1}</span>
+  <span className="p2">{mode==="pc" ? "PC" : jugador2 || "Jugador 2"} (O): {score2}</span>
+</div>
 
             <div className="board">
                 {board.map((cell, i) => (
@@ -32,11 +33,11 @@ function Juego() {
 
             <div className="controls">
                 {winner && <h3>{winner === "Empate" ? "¡Empate!" : `${winner} ganó!`}</h3>}
-                <button onClick={resetBoard}>Reiniciar ronda</button>
-
-<Link to="/">
-                <button onClick={resetGame}>Volver al inicio</button>
-</Link>
+               {habilitarVolver&& 
+                <button onClick={resetBoard}>Reiniciar ronda</button>}
+                <Link to="/">
+                    <button onClick={resetGame}>Volver al inicio</button>
+                </Link>
 
             </div>
         </div>

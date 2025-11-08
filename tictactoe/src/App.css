@@ -128,14 +128,31 @@ input:focus {
   to { color: #f0f; border-color: #f0f; }
 }
 
-/* SCOREBOARD */
 .scoreboard {
+  width: 100%;
   display: flex;
-  justify-content: space-around;
-  width: 300px;
-  margin: 10px auto;
-  text-shadow: 1px 1px #00f, 0 0 5px #0ff;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
 }
+
+/* Jugador 1 (X) */
+.scoreboard .p1 {
+  color: #ff5555; /* rojo suave */
+  border-bottom: 2px solid #ff5555;
+  padding-bottom: 4px;
+}
+
+/* Jugador 2 (O) */
+.scoreboard .p2 {
+  color: #4e9eff; /* azul suave */
+  border-bottom: 2px solid #4e9eff;
+  padding-bottom: 4px;
+}
+
 
 /* CONTROLES */
 .controls {

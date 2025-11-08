@@ -13,6 +13,7 @@ export function GameProvider({ children }) {
   const [jugador1, setJugador1] = useState("");
   const [jugador2, setJugador2] = useState("");
   const [step, setStep] = useState("menu");
+  const [habilitarVolver, setHabilitarVolver] = useState(false);
 
   // Reiniciar tablero
   const resetBoard = () => {
@@ -20,6 +21,7 @@ export function GameProvider({ children }) {
     setTurn("X");
     setWinner(null);
     setWinningCells([]);
+    setHabilitarVolver(false)
   };
 
   // Reiniciar todo
@@ -40,6 +42,7 @@ export function GameProvider({ children }) {
     newBoard[index] = turn;
     setBoard(newBoard);
     setTurn(turn === "X" ? "O" : "X");
+    setHabilitarVolver(true)
   };
 
   // IA media
@@ -67,7 +70,6 @@ export function GameProvider({ children }) {
     }
     return -1;
   };
-
   // Revisa ganador
   useEffect(() => {
     const combos = [
@@ -96,7 +98,7 @@ export function GameProvider({ children }) {
       return () => clearTimeout(timer);
     }
   }, [turn, mode, winner]);
-
+  
   return (
     <GameContext.Provider
       value={{
@@ -104,7 +106,8 @@ export function GameProvider({ children }) {
         jugador1, setJugador1, jugador2, setJugador2,
         score1, score2,
         board, turn, winner, winningCells,
-        handleClick, resetBoard, resetGame
+        handleClick, resetBoard, resetGame,
+        habilitarVolver
       }}
     >
       {children}

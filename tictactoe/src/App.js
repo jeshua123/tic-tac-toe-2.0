@@ -1,19 +1,21 @@
-import { useContext } from "react";
-import { GameContext } from "./context/GameContext";
-import { Routes, Route } from 'react-router';
+import {useEffect } from "react";
+import { Routes, Route,useNavigate } from 'react-router';
 import "./App.css";
 import Menu from "./components/Menu";
 import Juego from './components/Juego';
 import Nombres from './components/Nombres';
 
 function App() {
-  const {
-    step, setStep, mode, setMode,
-    jugador1, setJugador1, jugador2, setJugador2,
-    score1, score2,
-    board, winner, winningCells,
-    handleClick, resetBoard, resetGame
-  } = useContext(GameContext);
+  const navigate = useNavigate();
+
+  const handleReload = () => {
+    navigate('/');
+  };
+  
+useEffect(() => {
+handleReload()
+}, [])
+
 
   return (
     <div className="main">
