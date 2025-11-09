@@ -14,6 +14,7 @@ export function GameProvider({ children }) {
   const [jugador2, setJugador2] = useState("");
   const [step, setStep] = useState("menu");
   const [habilitarVolver, setHabilitarVolver] = useState(false);
+  const [partidaActual, setpartidaActual] = useState({})
 
   // Reiniciar tablero
   const resetBoard = () => {
@@ -70,6 +71,13 @@ export function GameProvider({ children }) {
     }
     return -1;
   };
+
+  //Guarda Partidas
+  const guardaPartidas=() => {
+let infoPartida={jugador1,jugador2,score1,score2}
+setpartidaActual(infoPartida)
+  }
+  console.log(estadísticas)
   // Revisa ganador
   useEffect(() => {
     const combos = [
@@ -91,6 +99,10 @@ export function GameProvider({ children }) {
     }
   }, [board]);
 
+  useEffect(() => {
+   if(score1||score2){guardaPartidas();console.log(estadísticas)}
+  }, [score1,score2])
+  
   // Movimiento del PC
   useEffect(() => {
     if (mode === "pc" && turn === "O" && !winner) {

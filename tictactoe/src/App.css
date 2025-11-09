@@ -142,14 +142,12 @@ input:focus {
 /* Jugador 1 (X) */
 .scoreboard .p1 {
   color: #ff5555; /* rojo suave */
-  border-bottom: 2px solid #ff5555;
   padding-bottom: 4px;
 }
 
 /* Jugador 2 (O) */
 .scoreboard .p2 {
   color: #4e9eff; /* azul suave */
-  border-bottom: 2px solid #4e9eff;
   padding-bottom: 4px;
 }
 
