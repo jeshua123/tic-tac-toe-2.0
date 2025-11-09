@@ -100,7 +100,7 @@ setpartidaActual(infoPartida)
   }, [board]);
 
   useEffect(() => {
-   if(score1||score2){guardaPartidas();console.log(estadísticas)}
+   if(score1||score2){guardaPartidas()}
   }, [score1,score2])
   
   // Movimiento del PC
