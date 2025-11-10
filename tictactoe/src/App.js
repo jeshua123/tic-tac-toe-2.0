@@ -4,6 +4,7 @@ import "./App.css";
 import Menu from "./components/Menu";
 import Juego from './components/Juego';
 import Nombres from './components/Nombres';
+import TablaPuntuación from './components/TablaPuntuación';
 
 function App() {
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ handleReload()
         <Route path="/" element={<Menu />} />
         <Route path="/nombres" element={<Nombres />} />
         <Route path="/juego" element={<Juego />} />
+        <Route path="/tablapuntuacion" element={<TablaPuntuación />} />
       </Routes>
     </div>
   );

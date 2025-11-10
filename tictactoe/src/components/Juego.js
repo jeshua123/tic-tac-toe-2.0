@@ -38,6 +38,9 @@ function Juego() {
                 <Link to="/">
                     <button onClick={resetGame}>Volver al inicio</button>
                 </Link>
+                <Link to="/tablapuntuacion">
+                    <button >Pontajes</button>
+                </Link>
 
             </div>
         </div>

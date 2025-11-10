@@ -15,6 +15,8 @@ export function GameProvider({ children }) {
   const [step, setStep] = useState("menu");
   const [habilitarVolver, setHabilitarVolver] = useState(false);
   const [partidaActual, setpartidaActual] = useState({})
+  const [pastidasGuardadas, setpPastidasGuardadas] = useState([])
+
 
   // Reiniciar tablero
   const resetBoard = () => {
@@ -34,9 +36,11 @@ export function GameProvider({ children }) {
     resetBoard();
     setMode("");
     setStep("menu");
+setpPastidasGuardadas((prev) => [...prev,partidaActual])
   };
 
   // Manejo de jugada
+
   const handleClick = (index) => {
     if (board[index] !== "" || winner) return;
     const newBoard = [...board];
@@ -77,7 +81,8 @@ export function GameProvider({ children }) {
 let infoPartida={jugador1,jugador2,score1,score2}
 setpartidaActual(infoPartida)
   }
-  console.log(estadísticas)
+  console.log(winner)
+  console.log(pastidasGuardadas)
   // Revisa ganador
   useEffect(() => {
     const combos = [
