@@ -15,7 +15,7 @@ export function GameProvider({ children }) {
   const [step, setStep] = useState("menu");
   const [habilitarVolver, setHabilitarVolver] = useState(false);
   const [partidaActual, setpartidaActual] = useState({})
-  const [pastidasGuardadas, setpPastidasGuardadas] = useState([])
+  const [partidasGuardadas, setpPastidasGuardadas] = useState([])
 
 
   // Reiniciar tablero
@@ -77,12 +77,12 @@ setpPastidasGuardadas((prev) => [...prev,partidaActual])
   };
 
   //Guarda Partidas
+
   const guardaPartidas=() => {
 let infoPartida={jugador1,jugador2,score1,score2}
 setpartidaActual(infoPartida)
   }
-  console.log(winner)
-  console.log(pastidasGuardadas)
+
   // Revisa ganador
   useEffect(() => {
     const combos = [
@@ -124,7 +124,7 @@ setpartidaActual(infoPartida)
         score1, score2,
         board, turn, winner, winningCells,
         handleClick, resetBoard, resetGame,
-        habilitarVolver
+        habilitarVolver,partidasGuardadas
       }}
     >
       {children}

@@ -161,9 +161,14 @@ h3 {
   text-shadow: 1px 1px #00f, 0 0 5px #0ff;
   animation: winnerBlink 1s infinite alternate;
 }
+table {
+  width: 100%;
+}
+
 
 @keyframes winnerBlink {
   0% { color: #0ff; text-shadow: 1px 1px #00f, 0 0 5px #0ff; }
   50% { color: #ff0; text-shadow: 1px 1px #ff0, 0 0 10px #ff0; }
   100% { color: #f0f; text-shadow: 1px 1px #f0f, 0 0 10px #f0f; }
 }
+
