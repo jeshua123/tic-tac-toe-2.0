@@ -18,6 +18,9 @@ function Menu() {
             Jugador vs PC
             </button>
             </Link>
+            <Link to="/tablapuntuacion">
+                    <button >Puntajes</button>
+                </Link>
         </div>
   )
 }

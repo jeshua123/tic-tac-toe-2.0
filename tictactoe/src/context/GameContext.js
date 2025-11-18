@@ -36,7 +36,8 @@ export function GameProvider({ children }) {
     resetBoard();
     setMode("");
     setStep("menu");
-setpPastidasGuardadas((prev) => [...prev,partidaActual])
+    setpPastidasGuardadas(prev => [...prev, partidaActual]);
+    setpartidaActual({})
   };
 
   // Manejo de jugada
@@ -78,10 +79,6 @@ setpPastidasGuardadas((prev) => [...prev,partidaActual])
 
   //Guarda Partidas
 
-  const guardaPartidas=() => {
-let infoPartida={jugador1,jugador2,score1,score2}
-setpartidaActual(infoPartida)
-  }
 
   // Revisa ganador
   useEffect(() => {
@@ -105,8 +102,17 @@ setpartidaActual(infoPartida)
   }, [board]);
 
   useEffect(() => {
-   if(score1||score2){guardaPartidas()}
-  }, [score1,score2])
+  if (winner === "X" || winner === "O") {
+    const nuevaPartida = {
+      jugador1,
+      jugador2,
+      score1,
+      score2
+    };
+
+    setpartidaActual(nuevaPartida);
+  }
+}, [winner]);
   
   // Movimiento del PC
   useEffect(() => {
@@ -124,7 +130,7 @@ setpartidaActual(infoPartida)
         score1, score2,
         board, turn, winner, winningCells,
         handleClick, resetBoard, resetGame,
-        habilitarVolver,partidasGuardadas
+        habilitarVolver,partidasGuardadas,partidaActual
       }}
     >
       {children}

@@ -56,7 +56,7 @@ body {
 }
 
 /* BOTONES */
-.menu button, .controls button {
+ button {
   background: #111;
   color: #0ff;
   border: 2px solid #0ff;
@@ -156,13 +156,51 @@ input:focus {
 .controls {
   text-align: center;
 }
-
-h3 {
-  text-shadow: 1px 1px #00f, 0 0 5px #0ff;
-  animation: winnerBlink 1s infinite alternate;
+/* PUNTAJES */
+.puntajes {
+  text-align: center;
+  margin-top: 20px;
 }
-table {
+
+.tabla {
   width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 1.1rem;
+}
+
+.tabla th {
+  background: #333;
+  color: white;
+  padding: 10px;
+}
+
+.tabla td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.jugador1 {
+  color: #1976d2; /* azul */
+  font-weight: bold;
+}
+
+.puntaje1 {
+  color: #1976d2;
+}
+
+.jugador2 {
+  color: #d32f2f; /* rojo */
+  font-weight: bold;
+}
+
+.puntaje2 {
+  color: #d32f2f;
+}
+
+.versus {
+  font-weight: bold;
+  color: #555;
 }
 
 
