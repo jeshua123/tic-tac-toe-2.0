@@ -14,7 +14,7 @@ export function GameProvider({ children }) {
   const [jugador2, setJugador2] = useState("");
   const [step, setStep] = useState("menu");
   const [habilitarVolver, setHabilitarVolver] = useState(false);
-  const [partidaActual, setpartidaActual] = useState({})
+  const [partidaActual, setpartidaActual] = useState(false)
   const [partidasGuardadas, setpPastidasGuardadas] = useState([])
 
 
@@ -36,8 +36,8 @@ export function GameProvider({ children }) {
     resetBoard();
     setMode("");
     setStep("menu");
-    setpPastidasGuardadas(prev => [...prev, partidaActual]);
-    setpartidaActual({})
+    if(partidaActual){setpPastidasGuardadas(prev => [...prev, partidaActual]);}
+    setpartidaActual(false)
   };
 
   // Manejo de jugada
@@ -102,7 +102,7 @@ export function GameProvider({ children }) {
   }, [board]);
 
   useEffect(() => {
-  if (winner === "X" || winner === "O") {
+  if (step==="juego") {
     const nuevaPartida = {
       jugador1,
       jugador2,
@@ -112,7 +112,7 @@ export function GameProvider({ children }) {
 
     setpartidaActual(nuevaPartida);
   }
-}, [winner]);
+}, [step,score1,score2]);
   
   // Movimiento del PC
   useEffect(() => {

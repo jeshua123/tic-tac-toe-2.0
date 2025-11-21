@@ -3,7 +3,7 @@ import { GameContext } from "../context/GameContext";
 import { Link } from "react-router-dom";
 
 export default function TablaPuntuacion() {
-  const { partidasGuardadas, partidaActual } = useContext(GameContext);
+  const { partidasGuardadas, partidaActual,resetGame} = useContext(GameContext);
   const { jugador1, jugador2, score1, score2 } = partidaActual
 
 
@@ -42,7 +42,7 @@ export default function TablaPuntuacion() {
         </table>
 
       )}
-      {score1 && (<><h2>Juego actual</h2>
+      {partidaActual && (<><h2>Juego actual</h2>
       <table className="tabla">
 
         <thead>
@@ -52,14 +52,17 @@ export default function TablaPuntuacion() {
             <th >vs</th>
             <th>{jugador2}{!jugador2 && "PC"}</th>
             <th>{score2}</th>
-
-
           </tr>
         </thead>
-      </table>   </>) }
-      <Link to="/juego">
-        <button >Volver</button>
+      </table> 
+        <Link to="/juego">
+        <button >Volver Partida actual</button>
+      </Link>  </>) }
+
+      <Link to="/">
+        <button onClick={() => {resetGame()}}>Inicio</button>
       </Link>
+
     </div>
   );
 }

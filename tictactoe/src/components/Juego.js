@@ -9,8 +9,9 @@ function Juego() {
         score1, score2,
         board, winner, winningCells,
         handleClick, resetBoard, resetGame,
-        habilitarVolver
+        habilitarVolver,partidaActual
     } = useContext(GameContext);
+    console.log(partidaActual)
     return (
         <div className="game">
 <div className="scoreboard">
