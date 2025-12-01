@@ -45,15 +45,16 @@ export default function TablaPuntuacion() {
       {partidaActual && (<><h2>Juego actual</h2>
       <table className="tabla">
 
-        <thead>
-          <tr>
-            <th>{jugador1}</th>
-            <th>{score1}</th>
-            <th >vs</th>
-            <th>{jugador2}{!jugador2 && "PC"}</th>
-            <th>{score2}</th>
-          </tr>
-        </thead>
+<thead>
+  <tr>
+    <th className="actual-jugador actual-jugador1">{jugador1}</th>
+    <th className="actual-jugador actual-jugador1">{score1}</th>
+    <th>vs</th>
+    <th className="actual-jugador actual-jugador2">{jugador2 || "PC"}</th>
+    <th className="actual-jugador actual-jugador2">{score2}</th>
+  </tr>
+</thead>
+
       </table> 
         <Link to="/juego">
         <button >Volver Partida actual</button>

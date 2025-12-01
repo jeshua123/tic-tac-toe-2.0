@@ -203,6 +203,20 @@ input:focus {
   color: #555;
 }
 
+.tabla .actual-jugador1 {
+  color: #1e90ff !important;
+}
+
+.tabla .actual-jugador2 {
+  color: #ff3b3b !important;
+}
+
+.actual-jugador {
+  font-size: 1.2rem;
+}
+
+
+
 
 @keyframes winnerBlink {
   0% { color: #0ff; text-shadow: 1px 1px #00f, 0 0 5px #0ff; }
