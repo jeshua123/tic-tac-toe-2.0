@@ -15,8 +15,15 @@ function Juego() {
     return (
         <div className="game">
 <div className="scoreboard">
-  <span className="p1">{jugador1 || "Jugador 1"} (X): {score1}</span>
-  <span className="p2">{mode==="pc" ? "PC" : jugador2 || "Jugador 2"} (O): {score2}</span>
+  <div className="p1">
+    <strong>{jugador1 || "Jugador 1"} (X)</strong>
+    <span>{score1}</span>
+  </div>
+
+  <div className="p2">
+    <strong>{mode === "pc" ? "PC" : jugador2 || "Jugador 2"} (O)</strong>
+    <span>{score2}</span>
+  </div>
 </div>
 
             <div className="board">

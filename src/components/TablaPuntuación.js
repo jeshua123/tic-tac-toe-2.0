@@ -12,19 +12,13 @@ export default function TablaPuntuacion() {
   return (
     <div className="puntajes">
       <h2>Tabla de Puntuaciones</h2>
-      {noHayPartidas ? (
-        <p>No hay partidas registradas aún.</p>
+      {noHayPartidas  ? (
+       !partidaActual && (<p>No hay partidas registradas aún.</p>) 
       ) : (
+      
+<div className="tabla-responsive ">
+    
         <table className="tabla">
-          <thead>
-            <tr>
-              <th>Jugador 1</th>
-              <th>Puntaje</th>
-              <th></th>
-              <th>Jugador 2</th>
-              <th>Puntaje</th>
-            </tr>
-          </thead>
 
           <tbody>
             {partidasGuardadas.map(
@@ -40,10 +34,14 @@ export default function TablaPuntuacion() {
             )}
           </tbody>
         </table>
-
+</div>
       )}
-      {partidaActual && (<><h2>Juego actual</h2>
-      <table className="tabla">
+      {partidaActual && (<>
+      
+      <h2>Juego actual</h2>
+
+<div className="tabla-responsive ">
+        <table className="tabla">
 
 <thead>
   <tr>
@@ -56,6 +54,8 @@ export default function TablaPuntuacion() {
 </thead>
 
       </table> 
+
+</div>
         <Link to="/juego">
         <button >Volver Partida actual</button>
       </Link>  </>) }

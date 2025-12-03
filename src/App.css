@@ -130,26 +130,55 @@ input:focus {
 
 .scoreboard {
   width: 100%;
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  margin-bottom: 15px;
-  font-size: 20px;
-  font-weight: 600;
+  max-width: 350px;
+  margin: 10px auto 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   text-align: center;
+  gap: 10px;
+  font-size: 16px;
 }
 
-/* Jugador 1 (X) */
+/* Jugador 1 */
 .scoreboard .p1 {
-  color: #ff5555; /* rojo suave */
-  padding-bottom: 4px;
+  color: #ff5555;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Jugador 2 (O) */
+/* Jugador 2 */
 .scoreboard .p2 {
-  color: #4e9eff; /* azul suave */
-  padding-bottom: 4px;
+  color: #4e9eff;
+  display: flex;
+  flex-direction: column;
 }
+
+.scoreboard strong {
+  font-size: 20px;
+}
+
+.scoreboard span {
+  font-size: 20px;
+  margin-top: 4px;
+  font-weight: bold;
+}
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+  .scoreboard {
+    font-size: 12px;
+    gap: 5px;
+  }
+
+  .scoreboard strong {
+    font-size: 17px;
+  }
+
+  .scoreboard span {
+    font-size: 17px;
+  }
+}
+
 
 
 /* CONTROLES */
@@ -162,11 +191,20 @@ input:focus {
   margin-top: 20px;
 }
 
+.tabla-responsive {
+  width: 100%;
+  max-width: 480px; 
+  margin: 0 auto;
+  overflow-x: auto; 
+  padding: 0 10px;  
+  margin-bottom: 30px;
+}
 .tabla {
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
   font-size: 1.1rem;
+  table-layout: fixed;
 }
 
 .tabla th {
