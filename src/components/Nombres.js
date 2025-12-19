@@ -8,7 +8,14 @@ function Nombres() {
     setStep, mode, jugador1, setJugador1, jugador2, setJugador2, } = useContext(GameContext);
   return (
     <div className="menu">
+    
       <h2>Ingresa los nombres</h2>
+        {mode !== "jugador" && (
+      <>
+        <button >Normal</button>
+        <button >Difícil</button>
+      </>
+      )}
       <input placeholder="Jugador 1" value={jugador1} onChange={e => setJugador1(e.target.value)} />
       {mode === "jugador" && (
         <input placeholder="Jugador 2" value={jugador2} onChange={e => setJugador2(e.target.value)} />
