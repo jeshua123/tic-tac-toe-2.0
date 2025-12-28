@@ -12,6 +12,7 @@ function Nombres() {
       <h2>Ingresa los nombres</h2>
         {mode !== "jugador" && (
       <>
+      <span>Elige Dificultad</span>
         <button >Normal</button>
         <button >Difícil</button>
       </>
