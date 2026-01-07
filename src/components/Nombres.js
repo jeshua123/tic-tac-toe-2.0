@@ -13,8 +13,11 @@ function Nombres() {
         {mode !== "jugador" && (
       <>
       <span>Elige Dificultad</span>
-        <button >Normal</button>
+  <div>
+     <button >Normal</button>
         <button >Difícil</button>
+
+  </div>
       </>
       )}
       <input placeholder="Jugador 1" value={jugador1} onChange={e => setJugador1(e.target.value)} />
