@@ -252,6 +252,9 @@ input:focus {
 .actual-jugador {
   font-size: 1.2rem;
 }
+.dificultad-button {
+ color: rgb(200, 255, 0); text-shadow: 1px 1px rgb(255, 136, 0), 0 0 5px  !important;
+}
 
 
 

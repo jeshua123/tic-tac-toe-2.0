@@ -14,7 +14,7 @@ function Nombres() {
       <>
       <span>Elige Dificultad</span>
   <div>
-     <button >Normal</button>
+     <button className="dificultad-button" >Normal</button>
         <button >Difícil</button>
 
   </div>
