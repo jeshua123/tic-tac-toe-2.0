@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 
 function Nombres() {
   const {
-    setStep, mode, jugador1, setJugador1, jugador2, setJugador2, } = useContext(GameContext);
+    setStep, mode, jugador1, setJugador1, jugador2, setJugador2,modoDifícil } = useContext(GameContext);
   return (
     <div className="menu">
     
@@ -14,8 +14,8 @@ function Nombres() {
       <>
       <span>Elige Dificultad</span>
   <div>
-     <button className="dificultad-button" >Normal</button>
-        <button >Difícil</button>
+     <button className={!modoDifícil &&"dificultad-button"} >Normal</button>
+        <button className={modoDifícil &&"dificultad-button"} >Difícil</button>
 
   </div>
       </>
