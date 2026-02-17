@@ -16,7 +16,14 @@ export function GameProvider({ children }) {
   const [habilitarVolver, setHabilitarVolver] = useState(false);
   const [partidaActual, setpartidaActual] = useState(false)
   const [partidasGuardadas, setpPastidasGuardadas] = useState([])
-const [modoDifícil, setmodoDifícil] = useState(true)
+const [modoDifícil, setmodoDifícil] = useState(false)
+
+
+
+// Elegir dificultad 
+function elegirDificultad () {
+  setmodoDifícil(!modoDifícil)
+}
 
   // Reiniciar tablero
   const resetBoard = () => {
@@ -131,7 +138,7 @@ const [modoDifícil, setmodoDifícil] = useState(true)
         board, turn, winner, winningCells,
         handleClick, resetBoard, resetGame,
         habilitarVolver,partidasGuardadas,partidaActual,
-        modoDifícil, setmodoDifícil
+        modoDifícil, setmodoDifícil,elegirDificultad
       }}
     >
       {children}
