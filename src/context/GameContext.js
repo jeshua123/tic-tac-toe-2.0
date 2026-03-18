@@ -21,9 +21,10 @@ const [modoDifícil, setmodoDifícil] = useState(false)
 
 
 // Elegir dificultad 
-function elegirDificultad () {
-  setmodoDifícil(!modoDifícil)
-
+function elegirDificultad (estado) {
+if (modoDifícil ===estado) return
+  setmodoDifícil(estado)
+  setTurn("O")
 }
 
   // Reiniciar tablero
@@ -63,7 +64,7 @@ function elegirDificultad () {
   const pcMove = () => {
     const newBoard = [...board];
     const winIndex = findBestMove(newBoard, "O");
-    if (winIndex !== 0) { newBoard[winIndex] = "O"; setBoard(newBoard); setTurn("X"); return; }
+    if (winIndex !== -1) { newBoard[winIndex] = "O"; setBoard(newBoard); setTurn("X"); return; }
     const blockIndex = findBestMove(newBoard, "X");
     if (blockIndex !== -1) { newBoard[blockIndex] = "O"; setBoard(newBoard); setTurn("X"); return; }
     const empty = newBoard.map((v,i)=>v===""?i:null).filter(v=>v!==null);
@@ -130,7 +131,6 @@ function elegirDificultad () {
     }
   }, [turn, mode, winner]);
   
-
   return (
     <GameContext.Provider
       value={{

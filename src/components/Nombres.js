@@ -14,9 +14,8 @@ function Nombres() {
       <>
       <span>Elige Dificultad</span>
   <div>
-     <button className={!modoDifícil &&"dificultad-button"} onClick={() => {elegirDificultad()}} >Normal</button>
-        <button className={modoDifícil &&"dificultad-button"}onClick={() => {elegirDificultad()}} >Difícil</button>
-
+     <button className={!modoDifícil &&"dificultad-button"} onClick={(e) => {elegirDificultad(false)}} >Normal</button>
+        <button className={modoDifícil &&"dificultad-button"}onClick={(e) => {elegirDificultad(true)}} >Difícil</button>
   </div>
       </>
       )}
