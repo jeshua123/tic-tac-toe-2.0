@@ -85,10 +85,7 @@ if (modoDifícil ===estado) return
     }
     return -1;
   };
-
   //Guarda Partidas
-
-
   // Revisa ganador
   useEffect(() => {
     const combos = [
@@ -109,7 +106,6 @@ if (modoDifícil ===estado) return
       setWinner("Empate");
     }
   }, [board]);
-
   useEffect(() => {
   if (step==="juego") {
     const nuevaPartida = {
@@ -118,7 +114,6 @@ if (modoDifícil ===estado) return
       score1,
       score2
     };
-
     setpartidaActual(nuevaPartida);
   }
 }, [step,score1,score2]);
