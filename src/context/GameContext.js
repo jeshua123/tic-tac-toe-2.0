@@ -139,6 +139,7 @@ if (modoDifícil ===estado) return
       }}
     >
       {children}
+      
     </GameContext.Provider>
   );
 }
